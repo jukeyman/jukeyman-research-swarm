@@ -1,0 +1,185 @@
+# Autonomous Research Swarm Configuration
+# Production-ready settings with all API integrations
+
+# Core loop settings
+max_steps: 12
+converge_loops: 3
+coverage_target: 0.88
+quality_target: 0.85
+parallel_researchers: 4
+rate_limit_rps: 1.5
+
+# LLM Provider Configuration
+llm:
+  provider: perplexity  # perplexity | google | moonshot | kimi
+  model: sonar-large-online
+  temperature: 0.2
+  max_tokens: 4096
+  system_prompts:
+    planner: "You are a world-class research project manager. Create comprehensive, specific research questions that cover all aspects of the topic."
+    analyst: "You are a neutral research analyst. Synthesize information objectively with precise citations. Use structured sections and evidence-based conclusions."
+    critic: "You are a meticulous research auditor. Evaluate completeness, evidence quality, balance, and clarity. Identify specific gaps and provide actionable feedback."
+    researcher: "You are a thorough researcher. Extract key insights and evidence from sources. Focus on factual, verifiable information."
+
+# Search Configuration
+search:
+  provider: perplexity  # perplexity | firecrawl | hyperbrowser
+  max_results: 8
+  timeout: 30
+  retry_attempts: 3
+
+# Embeddings Configuration
+embeddings:
+  provider: huggingface  # huggingface | google | openai
+  model: sentence-transformers/all-MiniLM-L6-v2
+  dimension: 384
+  batch_size: 32
+
+# Safety and Content Filtering
+safety:
+  allow_domains: [".edu", ".gov", ".org", ".ac.uk", ".mil", ".int"]
+  deny_domains: ["spam.site", "example-bad.org", "malware.com"]
+  allow_substrings: []
+  deny_substrings: ["/login", "/account", "/checkout", "/admin", "/private"]
+  obey_robots: true
+  pii_guardrails: true
+  content_filters:
+    - adult_content
+    - spam
+    - malware
+    - phishing
+
+# Source Ranking and Authority
+ranking:
+  authority_weights:
+    gov: 1.0
+    edu: 0.95
+    org: 0.85
+    mil: 0.90
+    int: 0.88
+    ac.uk: 0.92
+    com: 0.65
+    net: 0.60
+    info: 0.55
+  freshness_half_life_days: 365
+  citation_boost: 0.1
+  peer_review_boost: 0.15
+
+# Budget and Resource Management
+budgets:
+  max_minutes: 25
+  max_tokens: 200000
+  max_fetches: 150
+  max_concurrent_requests: 10
+  memory_limit_mb: 1024
+
+# Human-in-the-Loop Controls
+hitl:
+  approve_plan_changes: false
+  approve_final_report: true
+  pause_on_errors: false
+  interactive_mode: false
+
+# API Keys and Endpoints
+api_keys:
+  # LLM Providers
+  perplexity_api_key: "${PERPLEXITY_API_KEY}"
+  google_ai_api_key: "${GOOGLE_AI_API_KEY}"
+  moonshot_api_key: "${MOONSHOT_API_KEY}"
+  moonshot_base_url: "${MOONSHOT_BASE_URL}"
+  kimi_api_key: "${KIMI_API_KEY}"
+  
+  # Search and Crawling
+  firecrawl_api_key: "${FIRECRAWL_API_KEY}"
+  hyperbrowser_api_key: "${HYPERBROWSER_API_KEY}"
+  
+  # Embeddings and ML
+  huggingface_token: "${HUGGINGFACE_TOKEN}"
+  
+  # Data Sources
+  kaggle_username: "${KAGGLE_USERNAME}"
+  kaggle_key: "${KAGGLE_KEY}"
+  paperswithcode_token: "${PAPERSWITHCODE_TOKEN}"
+  
+  # Additional AI Services
+  jogg_ai_key: "${JOGG_AI_KEY}"
+  nebius_api_key: "${NEBIUS_API_KEY}"
+  aminos_ai_key: "${AMINOS_AI_KEY}"
+
+# Output and Logging
+output:
+  format: markdown
+  include_citations: true
+  include_metadata: true
+  save_intermediate: true
+  compress_artifacts: false
+
+logging:
+  level: INFO
+  format: json
+  include_timestamps: true
+  log_api_calls: true
+  log_performance: true
+
+# Memory and Caching
+memory:
+  enabled: true
+  vector_store: chroma  # chroma | faiss | memory
+  cache_embeddings: true
+  cache_search_results: true
+  cache_duration_hours: 24
+  max_cache_size_mb: 512
+
+# Quality Assurance
+quality:
+  min_sources_per_claim: 2
+  require_recent_sources: true
+  max_source_age_days: 1095  # 3 years
+  fact_check_enabled: true
+  bias_detection: true
+  sentiment_analysis: false
+
+# Research Methodology
+methodology:
+  research_depth: comprehensive  # basic | standard | comprehensive | exhaustive
+  include_opposing_views: true
+  cross_reference_sources: true
+  temporal_analysis: true
+  geographic_scope: global
+  language_preference: ["en", "es", "fr", "de", "zh"]
+
+# Export and Integration
+export:
+  formats: ["markdown", "json", "pdf", "html"]
+  include_raw_data: true
+  include_search_logs: true
+  include_performance_metrics: true
+  compress_exports: true
+
+# Advanced Features
+advanced:
+  enable_multi_agent_debate: true
+  enable_self_correction: true
+  enable_source_verification: true
+  enable_real_time_updates: false
+  enable_collaborative_filtering: true
+  enable_semantic_clustering: true
+
+# Performance Optimization
+performance:
+  async_batch_size: 10
+  connection_pool_size: 20
+  request_timeout: 30
+  retry_backoff_factor: 2
+  max_retry_delay: 60
+  enable_compression: true
+  enable_http2: true
+
+# Security Settings
+security:
+  validate_ssl: true
+  user_agent: "AutonomousResearchSwarm/1.0"
+  respect_rate_limits: true
+  anonymize_requests: false
+  encrypt_cache: false
+  secure_api_keys: true

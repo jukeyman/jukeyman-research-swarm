@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Credit Repair Software</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { position: relative; overflow-x: hidden; }
+    .particle {
+      position: absolute; border-radius: 50%; background: rgba(0, 255, 127, 0.12);
+      animation: floatParticle linear infinite; pointer-events: none;
+    }
+    @keyframes floatParticle { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-100vh); opacity: 0; } }
+    .tilt-card { transform-style: preserve-3d; transition: transform 0.2s ease, box-shadow 0.2s ease; animation: float 6s ease-in-out infinite; }
+    .tilt-card:hover { animation: none; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+    .tilt-card > * { transform: translateZ(40px); }
+    @keyframes float { 0% { transform: translateY(0px) } 50% { transform: translateY(-8px) } 100% { transform: translateY(0px) } }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-black via-[#0d1b1e] to-black text-white min-h-screen flex flex-col">
+  <div id="particles"></div>
+  
+  <!-- Navbar -->
+  <header class="w-full bg-white/10 backdrop-blur-lg border-b border-white/20 p-4 flex justify-between items-center z-20">
+    <h1 class="text-2xl font-bold text-emerald-400">Credit Repair Pro</h1>
+    <nav class="flex gap-6 text-lg">
+      <a href="#dashboard" class="hover:text-emerald-400">Dashboard</a>
+      <a href="#clients" class="hover:text-emerald-400">Clients</a>
+      <a href="#disputes" class="hover:text-emerald-400">Disputes</a>
+      <a href="#reports" class="hover:text-emerald-400">Reports</a>
+      <a href="#settings" class="hover:text-emerald-400">Settings</a>
+    </nav>
+  </header>
+
+  <!-- Sections -->
+  <section id="dashboard" class="p-8 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+    <div class="tilt-card bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6"><h2>Credit Score Overview</h2></div>
+    <div class="tilt-card bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6"><h2>Active Disputes</h2></div>
+    <div class="tilt-card bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6"><h2>New Clients</h2></div>
+    <div class="tilt-card bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6"><h2>Tasks & Deadlines</h2></div>
+  </section>
+
+  <section id="clients" class="p-8"><h2 class="text-2xl mb-4">Client Management</h2><p>Search, add, and manage client profiles.</p></section>
+  <section id="disputes" class="p-8"><h2 class="text-2xl mb-4">Dispute Center</h2><p>Create, track, and resolve credit disputes.</p></section>
+  <section id="reports" class="p-8"><h2 class="text-2xl mb-4">Reports & Analytics</h2><p>Generate detailed progress and compliance reports.</p></section>
+  <section id="settings" class="p-8"><h2 class="text-2xl mb-4">Settings</h2><p>Manage system preferences and integrations.</p></section>
+
+  <script>
+    document.querySelectorAll('.tilt-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * 10;
+        const rotateY = ((x - centerX) / centerX) * 10;
+        card.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = `rotateX(0deg) rotateY(0deg)`; });
+    });
+
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 40; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      const size = Math.random() * 6 + 4;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.top = `${Math.random() * 100}%`;
+      particle.style.animationDuration = `${5 + Math.random() * 10}s`;
+      particlesContainer.appendChild(particle);
+    }
+  </script>
+</body>
+</html>

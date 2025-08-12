@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liquid Glass Dashboard 2025</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      position: relative;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 105, 180, 0.15); /* pink particles */
+      animation: floatParticle linear infinite;
+      pointer-events: none;
+    }
+    @keyframes floatParticle {
+      0% { transform: translateY(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      animation: float 6s ease-in-out infinite;
+    }
+    .tilt-card:hover {
+      animation: none;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    .tilt-card h2, .tilt-card p, .tilt-card button {
+      transform: translateZ(40px);
+    }
+    @keyframes float {
+      0%   { transform: translateY(0px) }
+      50%  { transform: translateY(-8px) }
+      100% { transform: translateY(0px) }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-black via-[#1a1a1a] to-black text-white min-h-screen flex">
+  <!-- Particle Background -->
+  <div id="particles"></div>
+
+  <!-- Sidebar -->
+  <aside class="w-72 bg-white/10 backdrop-blur-2xl border-r border-white/20 p-5 flex flex-col justify-between relative z-10">
+    <div>
+      <h1 class="text-2xl font-bold mb-8 flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="text-pink-400 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364-6.364l-1.414 1.414M8.05 15.95l-1.414 1.414m12.728 0l-1.414-1.414M8.05 8.05L6.636 6.636" />
+        </svg> 
+        AI Sidebar
+      </h1>
+      <ul class="space-y-4 text-lg">
+        <li class="hover:text-pink-400 transition cursor-pointer">Dashboard</li>
+        <li class="hover:text-pink-400 transition cursor-pointer">Analytics</li>
+        <li class="hover:text-pink-400 transition cursor-pointer">Settings</li>
+      </ul>
+    </div>
+    <button id="themeToggle" class="bg-pink-500/70 hover:bg-pink-400 rounded-full p-3 transition">
+      <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-12.66l-.707.707M4.047 19.953l-.707.707M21 12h1M2 12H1m16.95 6.364l-.707-.707M6.343 6.343l-.707-.707" />
+      </svg>
+    </button>
+  </aside>
+
+  <!-- Bento Grid -->
+  <main class="flex-1 p-8 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative z-10">
+    <div class="tilt-card bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-lg p-6">
+      <h2 class="text-xl font-semibold mb-3">AI Insights</h2>
+      <p class="opacity-80">Real-time predictions & data trends</p>
+      <button class="mt-4 bg-pink-500/70 hover:bg-pink-400 transition-all px-4 py-2 rounded-lg">View More</button>
+    </div>
+    <div class="tilt-card bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-lg p-6">
+      <h2 class="text-xl font-semibold mb-3">Performance</h2>
+      <p class="opacity-80">Live metrics and analytics</p>
+      <button class="mt-4 bg-pink-500/70 hover:bg-pink-400 transition-all px-4 py-2 rounded-lg">View More</button>
+    </div>
+    <div class="tilt-card bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-lg p-6">
+      <h2 class="text-xl font-semibold mb-3">Tasks</h2>
+      <p class="opacity-80">Organized priority actions</p>
+      <button class="mt-4 bg-pink-500/70 hover:bg-pink-400 transition-all px-4 py-2 rounded-lg">View More</button>
+    </div>
+    <div class="tilt-card bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-lg p-6">
+      <h2 class="text-xl font-semibold mb-3">AR Preview</h2>
+      <p class="opacity-80">Immersive 3D/AR content ready</p>
+      <button class="mt-4 bg-pink-500/70 hover:bg-pink-400 transition-all px-4 py-2 rounded-lg">View More</button>
+    </div>
+  </main>
+
+  <script>
+    // AR Tilt Effect
+    document.querySelectorAll('.tilt-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * 10;
+        const rotateY = ((x - centerX) / centerX) * 10;
+        card.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+      });
+    });
+
+    // Dark Mode Toggle
+    document.getElementById("themeToggle").addEventListener("click", () => {
+      document.documentElement.classList.toggle("dark");
+    });
+
+    // Particle Generator
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 30; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      const size = Math.random() * 6 + 4;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.top = `${Math.random() * 100}%`;
+      particle.style.animationDuration = `${5 + Math.random() * 10}s`;
+      particlesContainer.appendChild(particle);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+{
+  "name": "jukeyman-research-swarm",
+  "version": "1.0.0",
+  "description": "Advanced AI-Powered Research Assistant with Multi-Agent Architecture by Rick Jefferson Solutions",
+  "main": "autonomous_research_swarm.py",
+  "scripts": {
+    "setup": "python setup.py",
+    "test": "python test_research.py",
+    "demo": "python test_research.py --demo",
+    "start": "python cli.py --interactive",
+    "research": "python cli.py",
+    "validate": "python -m py_compile autonomous_research_swarm.py && python -m py_compile cli.py",
+    "lint": "flake8 --max-line-length=120 *.py || echo 'Linting completed with warnings'",
+    "format": "black --line-length=120 *.py || echo 'Formatting completed'",
+    "security": "bandit -r . || echo 'Security scan completed'",
+    "deps-check": "safety check || echo 'Dependency check completed'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jukeyman/jukeyman-research-swarm.git"
+  },
+  "keywords": [
+    "ai",
+    "research",
+    "multi-agent",
+    "llm",
+    "automation",
+    "intelligence",
+    "web-search",
+    "analysis",
+    "synthesis",
+    "evidence-based",
+    "python",
+    "async",
+    "perplexity",
+    "google-ai",
+    "huggingface",
+    "research-assistant",
+    "knowledge-extraction",
+    "content-analysis",
+    "rick-jefferson-solutions",
+    "jukeyman"
+  ],
+  "author": {
+    "name": "Rick Jefferson Solutions",
+    "url": "https://github.com/jukeyman"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jukeyman/jukeyman-research-swarm/issues"
+  },
+  "homepage": "https://github.com/jukeyman/jukeyman-research-swarm#readme",
+  "engines": {
+    "python": ">=3.8"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.0",
+    "@semantic-release/git": "^10.0.0",
+    "semantic-release": "^22.0.0"
+  },
+  "config": {
+    "python_version": "3.8+",
+    "main_module": "autonomous_research_swarm.py",
+    "cli_module": "cli.py",
+    "test_module": "test_research.py",
+    "setup_module": "setup.py"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/jukeyman"
+  },
+  "contributors": [
+    {
+      "name": "Rick Jefferson",
+      "email": "contact@rickjeffersonsolutions.com",
+      "url": "https://github.com/jukeyman"
+    }
+  ],
+  "directories": {
+    "test": "tests",
+    "doc": "docs"
+  },
+  "files": [
+    "autonomous_research_swarm.py",
+    "cli.py",
+    "setup.py",
+    "test_research.py",
+    "config.yaml",
+    "requirements.txt",
+    "README.md",
+    "LICENSE",
+    "CONTRIBUTING.md"
+  ],
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/github",
+      "@semantic-release/git"
+    ]
+  },
+  "badges": {
+    "python": "https://img.shields.io/badge/python-3.8+-blue.svg",
+    "license": "https://img.shields.io/badge/license-MIT-green.svg",
+    "build": "https://github.com/jukeyman/jukeyman-research-swarm/workflows/CI/badge.svg",
+    "issues": "https://img.shields.io/github/issues/jukeyman/jukeyman-research-swarm.svg",
+    "stars": "https://img.shields.io/github/stars/jukeyman/jukeyman-research-swarm.svg"
+  },
+  "topics": [
+    "artificial-intelligence",
+    "research-automation",
+    "multi-agent-system",
+    "web-scraping",
+    "content-analysis",
+    "llm-integration",
+    "python-async",
+    "rick-jefferson-solutions"
+  ]
+}
